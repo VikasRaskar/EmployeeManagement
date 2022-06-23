@@ -33,7 +33,7 @@ router.get('/:EmpId', async (req, res) => {
 //Delete Specific Employee by Id
 router.delete('/:EmpId', async (req, res) => {
     try {
-        const deleteEmp = await Employee.remove({ id: req.params.EmpId });
+        const deleteEmp = await Employee.remove({_id: req.params.EmpId });
         res.json(deleteEmp)
     }
     catch (err) {
@@ -45,7 +45,7 @@ router.delete('/:EmpId', async (req, res) => {
 router.put('/:EmpId', async (req, res) => {
     try {
         const updateEmp = await Employee.updateOne(
-            { id: req.params.EmpId },
+            { _id: req.params.EmpId },
             { $set: { emp_Name: req.body.emp_Name, emp_Dep: req.body.emp_Dep, emp_Salary: req.body.emp_Salary, join_Date: req.body.join_Date, gender: req.body.gender, description: req.body.description } }
         )
         res.json(updateEmp)
@@ -60,7 +60,6 @@ router.put('/:EmpId', async (req, res) => {
 
 router.post('/', async (req, res) => {
     const employee = new Employee({
-        id : req.body.id,
         emp_Name: req.body.emp_Name,
         emp_Dep: req.body.emp_Dep,
         emp_Salary: req.body.emp_Salary,
@@ -81,7 +80,6 @@ router.post('/', async (req, res) => {
 router.post('/', (req, res) => {
     // console.log(req.body);
     const employee = new Employee({
-        id : req.body.id,
         emp_Name: req.body.emp_Name,
         emp_Dep: req.body.emp_Dep,
         emp_Salary: req.body.emp_Salary,
